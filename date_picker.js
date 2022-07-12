@@ -5,25 +5,38 @@ function(instance, context) {
     var startDate = new Date();
     var min_date = new Date();
     var button_date_start =new Date();
+    var button_date_end =new Date();
     var endDate = new Date();
     d.input = $('<input readonly style="padding:0px; border-width:0px; text-align:inherit; font-famliy:inherit; font-size:inherit; color:inherit; font-weight:inherit; text-decoration:inherit;font-style:inherit;background:transparent;">');
     c.append(d.input);
    
+  
    
-   
- 
-    var week_1_button = {
-        content: '1週間',
-        className: 'custom-button-classname',
-        onClick: (dp) => {
-            button_date_start.setDate(endDate.getDate()-7);
-             instance.publishState('start_date',button_date_start);
-             selectedDates[endDate,button_date_start];
+   var week_1_button = {
+    content: '1週間',
+    className: 'custom-button-classname',
+    onClick: (dp) => {
+        var week_1 = new Date();
+        button_date_start.setDate(endDate.getDate()-7);
+        dp.selectDate(button_date_start);
+        dp.selectDate(week_1);
+        dp.setViewDate(button_date_end);
+        dp.setViewDate(week_1);
 
-             
-        }
-     }
-   
+
+         
+    }
+ };
+
+ let button = {
+    content: 'Select 2021-07-26',
+    className: 'custom-button-classname',
+    onClick: (dp) => {
+        let date = new Date('2021-07-26');
+        dp.selectDate(date);
+        dp.setViewDate(date);
+    }
+}
     
     startDate.setDate(endDate.getDate()-14);
     min_date.setDate(endDate.getDate()-93);
@@ -36,15 +49,10 @@ function(instance, context) {
        firstDay:0,
        range:true,
        multipleDatesSeparator :' ~ ',
-       onSelect: function(obj){
-       i.publishState('start_date',obj.date[0]),
-        i.publishState('end_date',obj.date[1]),
-         instance.triggerEvent('value_is_changed', function () {});
-       },
        maxDate:new Date(),
        minDate:min_date,
        selectedDates:[endDate,startDate],
-       buttons: [week_1_button]
+       buttons: [week_1_button,button]
    });
    
   
