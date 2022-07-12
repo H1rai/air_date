@@ -26,7 +26,7 @@ function(instance, context) {
    
     
     startDate.setDate(endDate.getDate()-14);
-    min_date.setDate(endDate.getMonth()-93);
+    min_date.setDate(endDate.getDate()-93);
    
    instance.publishState('start_date',startDate);
    instance.publishState('end_date',endDate);
