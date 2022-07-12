@@ -21,21 +21,19 @@ function(instance, context) {
         dp.selectDate(button_date_start);
         dp.selectDate(week_1);
         dp.setViewDate(button_date_end);
-        dp.setViewDate(week_1);
-
-
-         
+        dp.setViewDate(week_1); 
     }
  };
 
  let button = {
-    content: 'Select 2021-07-26',
+    content: 'OK',
     className: 'custom-button-classname',
-    onClick: (dp) => {
-        let date = new Date('2021-07-26');
-        dp.selectDate(date);
-        dp.setViewDate(date);
-    }
+    onClick: function(obj){
+        instance.publishState('start_date',startDate),
+        instance.publishState('end_date',endDate),
+         instance.triggerEvent('value_is_changed', function () {});
+         console.log('start',startDate,'end',endDate);
+       }
 }
     
     startDate.setDate(endDate.getDate()-14);
@@ -51,6 +49,15 @@ function(instance, context) {
        multipleDatesSeparator :' ~ ',
        maxDate:new Date(),
        minDate:min_date,
+
+         onSelect: function(obj){
+            startDate = obj.date[0];
+            endDate =obj.date[1];
+       
+         
+         console.log('start',startDate,'end',endDate);
+       },
+
        selectedDates:[endDate,startDate],
        buttons: [week_1_button,button]
    });
