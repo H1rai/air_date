@@ -14,9 +14,9 @@ function(instance, context) {
    content: '1週間',
    className: 'custom-button-classname',
    onClick: (dp) => {
-       var button_date_end = new Date();
-       button_date_start.setDate(button_date_end.getDate()-7)
-       dp.selectedDates[button_date_start,button_date_end];
+       var button_date_end = new Date()-7;
+       dp.selectDate(button_date_end);
+        dp.setViewDate(button_date_end);
    }
 }
 
