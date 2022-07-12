@@ -16,8 +16,7 @@ function(instance, context) {
    onClick: (dp) => {
        var button_date_end = new Date();
        button_date_start.setDate(button_date_end.getDate()-7)
-       dp.selectDate[button_date_start,button_date_end];
-       dp.setViewDate[button_date_start,button_date_end];
+       dp.selectedDates[button_date_start,button_date_end];
    }
 }
 
