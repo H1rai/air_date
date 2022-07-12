@@ -5,23 +5,26 @@ function(instance, context) {
     var startDate = new Date();
     var min_date = new Date();
     var button_date_start =new Date();
+    var endDate = new Date();
     d.input = $('<input readonly style="padding:0px; border-width:0px; text-align:inherit; font-famliy:inherit; font-size:inherit; color:inherit; font-weight:inherit; text-decoration:inherit;font-style:inherit;background:transparent;">');
     c.append(d.input);
    
    
    
-   var week_1_button = {
-   content: '1週間',
-   className: 'custom-button-classname',
-   onClick: (dp) => {
-       var button_date_end = new Date()-7;
-       dp.selectDate(button_date_end);
-        dp.setViewDate(button_date_end);
-   }
-}
+ 
+    var week_1_button = {
+        content: '1週間',
+        className: 'custom-button-classname',
+        onClick: (dp) => {
+            button_date_start.setDate(endDate.getDate()-7);
+             instance.publishState('start_date',button_date_start);
+             selectedDates[endDate,button_date_start];
 
+             
+        }
+     }
    
-    var endDate = new Date();
+    
     startDate.setDate(endDate.getDate()-14);
     min_date.setDate(endDate.getMonth()-93);
    
