@@ -17,11 +17,20 @@ function(instance, context) {
     className: 'custom-button-classname',
     onClick: (dp) => {
         var week_1 = new Date();
-        button_date_start.setDate(endDate.getDate()-7);
-        dp.selectDate(button_date_start);
-        dp.selectDate(week_1);
-        dp.setViewDate(button_date_end);
-        dp.setViewDate(week_1); 
+        endDate = new Date();
+        button_date_start.setDate(week_1.getDate()-7);
+        button_date_end.setDate(week_1.getDate());
+
+        
+        dp.selectedDates[0]=button_date_start;
+        dp.selectedDates[1]=button_date_end;
+
+        
+        dp.setViewDate[0]=button_date_start;
+        dp.setViewDate[1]=button_date_end;
+
+       console.log(dp);
+       
     }
  };
 
@@ -33,6 +42,8 @@ function(instance, context) {
         instance.publishState('end_date',endDate),
          instance.triggerEvent('value_is_changed', function () {});
          console.log('start',startDate,'end',endDate);
+        obj.hide();
+        
        }
 }
     
@@ -50,19 +61,17 @@ function(instance, context) {
        maxDate:new Date(),
        minDate:min_date,
 
+       
          onSelect: function(obj){
             startDate = obj.date[0];
             endDate =obj.date[1];
-       
          
-         console.log('start',startDate,'end',endDate);
        },
 
        selectedDates:[endDate,startDate],
        buttons: [week_1_button,button]
-   });
-   
-  
-   
-   
+   }
+                     
+                    );
+
 }
