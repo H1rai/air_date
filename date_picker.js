@@ -6,12 +6,12 @@ function(instance, context,properties) {
     var fromDate = new Date();
     var toDate = new Date();
     var min_date = new Date();
-    fromDate.setHours(12);
-    fromDate.setMinutes(00);
-    fromDate.setSeconds(00);
-    toDate.setHours(12);
-    toDate.setMinutes(00);
-    toDate.setSeconds(00);
+    fromDate.setHours(23);
+    fromDate.setMinutes(59);
+    fromDate.setSeconds(59);
+    toDate.setHours(23);
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
 
 
     d.input = $('<input readonly style="padding:0px; border-width:0px; text-align:inherit; font-famliy:inherit; font-size:inherit; color:inherit; font-weight:inherit; text-decoration:inherit;font-style:inherit;background:transparent;">');
@@ -30,13 +30,13 @@ var week_1_button = {
     onClick: (dp) => {
         var week_1 = new Date();
         fromDate = new Date();
-        fromDate.setHours(12);
-        fromDate.setMinutes(00);
-        fromDate.setSeconds(00);
+        fromDate.setHours(23);
+        fromDate.setMinutes(59);
+        fromDate.setSeconds(59);
         toDate = new Date();
-        toDate.setHours(12);
-        toDate.setMinutes(00);
-        toDate.setSeconds(00);
+        toDate.setHours(23);
+        toDate.setMinutes(59);
+        toDate.setSeconds(59);
 
         fromDate.setDate(fromDate.getDate()-7),
         instance.publishState('start_date',fromDate),
@@ -74,7 +74,6 @@ new AirDatepicker(d.input[0], {
         onSelect: function(obj){
             fromDate = obj.date[0];
             toDate =obj.date[1];
-            console.log("a");
         }
         
 

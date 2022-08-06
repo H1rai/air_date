@@ -1,28 +1,12 @@
 function(instance, properties, context) {
- var datepicker = instance.data.datepicker;
- 
-    if(datepicker != null){
-     if(properties.thedate!=null){
-         if(properties.enable_range === true){
-     	datepicker.selectDate(properties.thedate);
-        instance.publishState('value',properties.thedate);
-        instance.publishState('valuelist',[properties.thedate]);
-     	instance.publishState('range',[c]);
-       } else {
-           datepicker.selectDate(properties.thedate);
-        instance.publishState('value',properties.thedate);
-        instance.publishState('valuelist',[properties.thedate]);
-           
-       }
-        
-     }
-     else{
-       datepicker.clear();
-       instance.publishState('range', null);
-  	   instance.publishState('valuelist',null); 
-       instance.publishState('value',null);  
-     }
-     
- }
 
-}
+    const dp = new AirDatepicker('#el');
+
+            instance.publishState('start_date',properties.start_set_deta),
+            instance.publishState('end_date',properties.end_set_deta),
+            console.log(properties),
+            console.log(dp),
+
+    
+    
+    }
