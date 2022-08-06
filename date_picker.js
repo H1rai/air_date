@@ -1,77 +1,84 @@
-function(instance, context) {
+function(instance, context,properties) {
     const i = instance;
     const d = i.data;
     const c = i.canvas;
-    var startDate = new Date();
+    const dp = new AirDatepicker('#el');
+    var fromDate = new Date();
+    var toDate = new Date();
     var min_date = new Date();
-    var button_date_start =new Date();
-    var button_date_end =new Date();
-    var endDate = new Date();
+    fromDate.setHours(12);
+    fromDate.setMinutes(00);
+    fromDate.setSeconds(00);
+    toDate.setHours(12);
+    toDate.setMinutes(00);
+    toDate.setSeconds(00);
+
+
     d.input = $('<input readonly style="padding:0px; border-width:0px; text-align:inherit; font-famliy:inherit; font-size:inherit; color:inherit; font-weight:inherit; text-decoration:inherit;font-style:inherit;background:transparent;">');
     c.append(d.input);
-   
-  
-   
-   var week_1_button = {
+    
+    fromDate.setDate(toDate.getDate()-14);
+    min_date.setDate(toDate.getDate()-93);
+
+instance.publishState('start_date',fromDate);
+instance.publishState('end_date',toDate);
+console.log(dp);
+
+var week_1_button = {
     content: '1週間',
     className: 'custom-button-classname',
     onClick: (dp) => {
         var week_1 = new Date();
-        endDate = new Date();
-        button_date_start.setDate(week_1.getDate()-7);
-        button_date_end.setDate(week_1.getDate());
+        fromDate = new Date();
+        fromDate.setHours(12);
+        fromDate.setMinutes(00);
+        fromDate.setSeconds(00);
+        toDate = new Date();
+        toDate.setHours(12);
+        toDate.setMinutes(00);
+        toDate.setSeconds(00);
 
-        
-        dp.selectedDates[0]=button_date_start;
-        dp.selectedDates[1]=button_date_end;
-
-        
-        dp.setViewDate[0]=button_date_start;
-        dp.setViewDate[1]=button_date_end;
-
-       console.log(dp);
-       
+        fromDate.setDate(fromDate.getDate()-7),
+        instance.publishState('start_date',fromDate),
+        instance.publishState('end_date',toDate),
+    console.log(dp),
+    dp.selectDate([fromDate,toDate]),
+    dp.hide();
     }
- };
+};
 
- let button = {
+let button = {
     content: 'OK',
     className: 'custom-button-classname',
-    onClick: function(obj){
-        instance.publishState('start_date',startDate),
-        instance.publishState('end_date',endDate),
-         instance.triggerEvent('value_is_changed', function () {});
-         console.log('start',startDate,'end',endDate);
-        obj.hide();
+    onClick: function(dp){
+        instance.publishState('start_date',fromDate),
+        instance.publishState('end_date',toDate),
+        instance.triggerEvent('value_is_changed', function () {});
+        console.log('start',fromDate,'end',toDate);
+        dp.hide();
         
-       }
+    }
 }
     
-    startDate.setDate(endDate.getDate()-14);
-    min_date.setDate(endDate.getDate()-93);
-   
-   instance.publishState('start_date',startDate);
-   instance.publishState('end_date',endDate);
 
 
-   new AirDatepicker(d.input[0], {
-       firstDay:0,
-       range:true,
-       multipleDatesSeparator :' ~ ',
-       maxDate:new Date(),
-       minDate:min_date,
+new AirDatepicker(d.input[0], {
+    firstDay:0,
+    range:true,
+    multipleDatesSeparator :' ~ ',
+    maxDate:new Date(),
+    minDate:min_date,
+    selectedDates:[toDate,fromDate],
+    buttons: [week_1_button,button],
+    
+        onSelect: function(obj){
+            fromDate = obj.date[0];
+            toDate =obj.date[1];
+            console.log("a");
+        }
+        
 
-       
-         onSelect: function(obj){
-            startDate = obj.date[0];
-            endDate =obj.date[1];
-         
-       },
-
-       selectedDates:[endDate,startDate],
-       buttons: [week_1_button,button]
-   }
-                     
+},
                     );
 
 }
